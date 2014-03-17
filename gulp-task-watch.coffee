@@ -32,8 +32,8 @@ exports.watch = (name, src, pipes..., dest, files) ->
   gulp.task name, ->
     stream = source src
       .pipe cache name
-      .pipe notify 'Compiled <%= file.relative %>'
-    pipe stream, pipes, dest
+    stream = pipe stream, pipes, dest
+    stream.pipe notify 'Compiled <%= file.relative %>' if files
 
 exports.serve = (baseDir = './') ->
   browserSync.init destinations,
